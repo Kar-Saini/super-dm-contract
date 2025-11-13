@@ -5,7 +5,7 @@ use crate::state::{dm_escrow::DMEscrow, dm_pda::DMPda};
 use crate::{dm, instruction};
 
 #[derive(Accounts)]
-#[instruction(dm_pda_pubkey:Pubkey)]
+#[instruction(dm_pda_pubkey:Pubkey, nonce:u64)]
 pub struct InitDMEscrow<'info> {
     #[account(mut)]
     pub user : Signer<'info>, 
@@ -13,7 +13,7 @@ pub struct InitDMEscrow<'info> {
             init, 
             payer = user,
             space = 8 + DMEscrow::INIT_SPACE, 
-            seeds = [b"dm_escrow_pda", user.key().as_ref(),dm_pda_pubkey.as_ref()],
+            seeds = [b"dm_escrow_pda", user.key().as_ref(), dm_pda_pubkey.as_ref(), nonce.to_be_bytes()],
             bump
         )
     ]

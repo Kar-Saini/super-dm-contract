@@ -27,4 +27,5 @@ pub enum Status {
     Rejected,
     Pending,
     Accepted,
+    Cancelled,
 }

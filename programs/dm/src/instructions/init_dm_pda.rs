@@ -3,7 +3,7 @@ use anchor_lang::system_program;
 use crate::{dm, state::{dm_pda::{DMPda, DMType, Status}, influencer_profile::InfluencerProfile}};
 
 #[derive(Accounts)]
-#[instruction(influencer_pubkey:Pubkey)]
+#[instruction(influencer_pubkey:Pubkey, nonce:u64)]
 pub struct InitDMPda<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
@@ -11,7 +11,7 @@ pub struct InitDMPda<'info> {
         init,
         payer = user, 
         space = 8 + DMPda::INIT_SPACE, 
-        seeds = [b"dm_pda", user.key().as_ref()], 
+        seeds = [b"dm_pda", user.key().as_ref(), influencer_pubkey.as_ref(), nonce.to_be_bytes()], 
         bump
     )]
     pub dm_pda :Account<'info, DMPda>, 
