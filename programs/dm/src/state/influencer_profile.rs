@@ -1,6 +1,7 @@
 use anchor_lang::prelude::*;
 
+#[account]
 #[derive(InitSpace)]
 pub struct InfluencerProfile {
-    pubkey: Pubkey,
+    pub public_key: Pubkey,
 }

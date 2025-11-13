@@ -1,11 +1,11 @@
-use anchor_lang::InitSpace;
+use anchor_lang::prelude::*;
 
 #[account]
 #[derive(InitSpace)]
 pub struct DMEscrow {
     pub sol_attached: u64,
-    pub influencer_pubkey: Pubkey,
     pub dm_pda_pubkey: Pubkey,
-    pub sender_pubkey: Pubkey,
+    pub created_at: i64,
+    pub expires_at: i64,
     pub nonce: u64,
 }
