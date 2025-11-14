@@ -10,7 +10,7 @@ pub struct CancelDM<'info> {
     #[account(
         mut, 
         close = user,
-        seeds = [b"dm_escrow_pda", user.key().as_ref(), dm_pda_pubkey.as_ref(), nonce.to_be_bytes()],
+        seeds = [b"dm_escrow_pda", user.key().as_ref(), dm_pda.key().as_ref(), nonce.to_be_bytes()],
         bump
     )]
     pub dm_escrow_pda: Account<'info, DMEscrow>,
